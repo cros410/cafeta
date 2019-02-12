@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "12cc7d47-1d2a-45e6-a512-953ad8c4d6dd",
+		"name": "cafeta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Valid user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be33a409-5f02-4e36-b1ec-2c3a94bd599f",
+						"exec": [
+							"pm.test(\"Valid password\", ()=> {\r",
+							"    const data = pm.response.json()\r",
+							"    pm.response.to.have.status(200)\r",
+							"    pm.expect(data.code).to.eql(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"test\",\n\t\"password\" : \"1234567\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be33a409-5f02-4e36-b1ec-2c3a94bd599f",
+						"exec": [
+							"pm.test(\"Invalid password\", ()=> {\r",
+							"    const data = pm.response.json()\r",
+							"    pm.response.to.have.status(422)\r",
+							"    pm.expect(data.code).to.eql(3000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"test\",\n\t\"password\" : \"d\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
